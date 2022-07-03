@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: API de Estados
+  description: API para controlar os estados.
+  version: 0.0.1
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers:
+- url: http://localhost:8080
+  description: Porta usada no localhost
+paths:
+    /api/states:
+      get:
+        summary: Lista todos os estados
+        parameters:
+        - name: region
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: sort
+          in: query
+          schema: 
+            type: string
+          required: false
+        responses:
+          200:
+            description: Ok
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items: 
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      nome:
+                        type: string
+                      regiao:
+                        type: string
+                      populacao:
+                        type: number
+                      capital:
+                        type: string
+                      area:
+                        type: number
+          400:
+            description: Bad Request
+      post:
+        summary: Cria um novo estado
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nome:
+                    type: string
+                  regiao:
+                    type: string
+                  populacao:
+                    type: number
+                  capital:
+                    type: string
+                  area:
+                    type: number
+        responses:
+          201:
+            description: Ok
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    nome:
+                      type: string
+                    regiao:
+                      type: string
+                    populacao:
+                      type: number
+                    capital:
+                      type: string
+                    area:
+                      type: number
+          400:
+            description: Bad Request
+    /api/states/{id}:
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      get:
+        summary: Listar por id
+        responses:
+          200:
+            description: Ok
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      nome:
+                        type: string
+                      regiao:
+                        type: object
+                      populacao:
+                        type: number
+                      capital:
+                        type: string
+                      area:
+                        type: number
+          400:
+            description: Bad Request
+      put:
+        summary: Atualizar estado
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nome:
+                    type: string
+                  regiao:
+                    type: string
+                  populacao:
+                    type: number
+                  capital:
+                    type: string
+                  area:
+                    type: number
+        responses:  
+          200:
+            description: Ok
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      nome:
+                        type: string
+                      regiao:
+                        type: object
+                      populacao:
+                        type: number
+                      capital:
+                        type: string
+                      area:
+                        type: number
+          400:
+            description: Bad Request
+      delete:
+        summary: Deletando estado por id
+        responses:
+          200:  
+            description: Ok
+          400:
+            description: Bad Request
+    
